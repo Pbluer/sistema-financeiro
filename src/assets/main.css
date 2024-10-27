@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.content{
+    @apply w-full px-5 py-6 mt-10;
+}
+
+.content-form{
+    @apply w-full mt-10 px-10 py-6 flex flex-col items-center;
+}
+
+.main{
+    @apply flex flex-row w-screen;
+}
+
+.form{
+    @apply flex flex-col items-center px-4 py-2 gap-y-3 columns-12
+        xl:columns-10
+        lg:columns-8
+        md:columns-4
+        sm:columns-2
+    ;
+    
+}
+
+.section-input{
+    @apply w-80 flex flex-col items-start my-2
+        sm:w-[25rem]
+        md:w-[34rem]
+        lg:w-[30rem];
+    
+}
+
+.input{
+    @apply p-2 my-1 rounded-lg border border-gray-200 border-solid w-full focus:outline-none shadow-sm;
+}
+
+.button-primary{
+    @apply px-4 py-2 border-2 border-blue-600 rounded-lg bg-blue-600 text-white text-sm hover:border-gray-700 hover:outline-none shadow-sm;
+}
+
+.button-success{
+    @apply px-4 py-2 border-2 border-green-600 rounded-lg bg-green-600 text-white text-sm hover:border-gray-700 hover:outline-none shadow-sm;
+}
