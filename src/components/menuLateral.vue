@@ -8,14 +8,15 @@ import CarrinhoMercado from "@/components/icons/carrinhoMercadoIcon.vue"
 import CodigoBarra from "@/components/icons/codigoBarraIcon.vue"
 </script>
 <template>
-    <router-link :to="{ name:'inicio'}" class="absolute ml-5 mt-3 right-5">
+    
+    <router-link :to="{ name:'inicio'}" class="absolute ml-5 mt-3 right-5" :class=" $route.name == 'inicio' ? 'hidden' : ''">
        <HomeIcon class="fill-blue-700 w-[30px] "/> 
     </router-link>
 
     <div class="group">
         <MenuIcon class="absolute fill-blue-700 w-[30px] ml-5 mt-3" />  
 
-        <div class="flex-col bg-blue-700 h-[99.8vh] w-[300px] hidden group-hover:absolute group-hover:flex animate__animated animate__slideInLeft z-50 shadow-sm">
+        <div class="flex-col bg-blue-700 w-[300px] hidden group-hover:absolute group-hover:flex animate__animated animate__slideInLeft z-50 min-h-full">
             <div class="flex flex-col items-center my-10">
                 <PersonIcon class="fill-white w-[6rem]"/>
 
@@ -36,7 +37,7 @@ import CodigoBarra from "@/components/icons/codigoBarraIcon.vue"
                     </div>                
                 </router-link>
                 
-                <router-link :to="{ name:'cartaoCadastro'}" class="flex flex-row w-full border-b-2 h-[55px]
+                <router-link :to="{ name:'comprasFiltro'}" class="flex flex-row w-full border-b-2 h-[55px]
                     hover:bg-blue-950">
                     <div class="h-full flex items-center justify-center px-5 py-4 w-20">
                         <CarrinhoMercado class="fill-white "/> 
@@ -46,7 +47,7 @@ import CodigoBarra from "@/components/icons/codigoBarraIcon.vue"
                     </div>                
                 </router-link>
 
-                <router-link :to="{ name:'cartaoFiltro'}" class="flex flex-row w-full border-b-2 h-[55px]
+                <router-link :to="{ name:'inicio'}" class="flex flex-row w-full border-b-2 h-[55px]
                     hover:bg-blue-950">
                     <div class="h-full flex items-center justify-center px-5 py-4 w-20">
                         <CodigoBarra class="fill-white "/> 

@@ -60,7 +60,7 @@ $.extend( true, DataTable.defaults, {
 
 // Default class modification
 $.extend( true, DataTable.ext.classes, {
-	container: "dt-container dt-tailwindcss",
+	container: "dt-container dt-tailwindcss max-w-[85vw] flex flex-col m-auto",
 	search: {
 		input: "ml-2 p-2 rounded-xl border-2 focus:outline-none "
 	},
@@ -71,22 +71,22 @@ $.extend( true, DataTable.ext.classes, {
 		container: "dt-processing"
 	},
 	paging: {
-		active: 'w-[25px] font-bold bg-blue-600 text-white',
-		notActive: 'w-[75px] bg-white text-gray-700',
+		active: 'w-[20px] font-bold bg-blue-600 text-white',
+		notActive: 'w-[66px] sm:w-[75px] bg-white text-gray-700',
 		button: 'relative inline-flex justify-center items-center space-x-2 border px-4 py-2 -mr-px leading-6 hover:z-10 focus:z-10 active:z-10 border-blue-600 active:border-gray-200 active:shadow-none ',
 		first: 'rounded-l-lg',
 		last: 'rounded-r-lg',
 		enabled: 'text-blue-700 hover:border-gray-300 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25',
 		notEnabled: 'text-blue-700'
 	},
-	table: 'dataTable text-sm whitespace-nowrap',
+	table: 'dataTable text-sm whitespace-nowrap ',
 	thead: {
 		row: 'border-b-2 border-blue-700 ',
 		cell: 'px-3 py-4 text-gray-900 bg-gray-100/75 font-semibold text-left '
 	},
 	tbody: {
 		row: 'border-2 border-gray-200',
-		cell: 'p-3'
+		cell: 'p-2'
 	},
 } );
 

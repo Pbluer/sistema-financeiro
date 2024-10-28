@@ -34,7 +34,25 @@ const router = createRouter({
         },
       ]
       
-    }    
+    },
+    {
+      path: '/compras',
+      name: 'compras',
+      component: () => import('../views/compras/indexComprasView.vue'),
+      children:[
+        { 
+          path:'filtro',
+          name: 'comprasFiltro',
+          component: () => import('../views/compras/comprasFiltroView.vue') 
+        },
+        { 
+          path:'cadastro',
+          name: 'comprasCadastro',
+          component: () => import('../views/compras/comprasCadastroView.vue') 
+        },
+      ]
+      
+    }
   ]
 })
 
