@@ -1,7 +1,7 @@
 <template>
     <div class="section-input">
         <label class="label-input" :for="id">{{ label }}</label>
-        <input class="input" type="number" :name="id" :id="id" :min="min" :max="max" :class="class">
+        <input class="input" type="text" :name="id" :id="id" :class="class">
     </div>
 </template>
 <script>
@@ -12,22 +12,13 @@ export default {
             required: true
         },
         descricao:{
-            type: String,
+            type: String,   
             required: false
         },
         label:{
             type: String,
             default: 'Default',
             required: true
-        },
-        min:{
-            type: String,
-            default: 0,
-            required: true
-        },
-        max:{
-            type: String,
-            required: false
         },
         class:{
             type: String,

@@ -8,7 +8,7 @@
             </div>
 
             <div class="form">
-                <InputBase id="descricao" type="text" label="Descrição" />
+                <InputTextBase id="descricao" label="Descrição" />
                 
                 <SelectBase id="ativo" label="Ativo" :option="[ { value: 1, descricao: 'Sim'}, { value: 0, descricao: 'Não'}]"/>
 

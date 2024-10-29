@@ -30,11 +30,18 @@
 }
 
 .section-input{
-    @apply flex flex-col items-start my-2;    
+    @apply flex flex-col items-start;    
 }
 
 .input{
-    @apply p-2 my-1 rounded-lg border border-gray-200 border-solid w-full focus:outline-none shadow-sm;
+    @apply p-2 my-1 rounded-lg border border-gray-200 border-solid focus:outline-none shadow-sm;
+}
+
+.input-width{
+    @apply w-[80vw] sm:w-[70vw]
+    md:w-[50vw]
+    lg:w-[400px]
+    ;
 }
 
 .button-primary{

@@ -5,7 +5,7 @@
         <div class="content">
 
             <div class="border-b-2 border-blue-700 mb-5 pb-5">
-                <ButtonBase id="pesquisar" type="text" descricao="Cadastrar" @click=" () => $router.push({ name: 'comprasCadastro'})"/>
+                <ButtonBase id="pesquisar" type="text" titulo="Cadastrar" @click=" () => $router.push({ name: 'comprasCadastro'})"/>
             </div>
 
             <div>
@@ -19,7 +19,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td > <ButtonBase id="pesquisar" type="text" descricao="Acessar"/> </td>
+                            <td > <ButtonBase id="pesquisar" type="text" titulo="Acessar"/> </td>
                             <td> 00/00/0000 à 00/00/000 </td>
                             <td>2</td>
                         </tr>                        

@@ -1,7 +1,7 @@
 <template>
     <div class="section-input">
         <label class="label-input" :for="id">{{ label ? '&nbsp;' : '' }}</label>
-        <button :class="class" :id="id" :type="type"> {{descricao}} </button>
+        <button :class="class" :id="id" :type="type"> {{titulo}} </button>
     </div>
 </template>
 <script>
@@ -20,7 +20,7 @@ export default {
             type: String,
             required: false
         },
-        descricao:{
+        titulo:{
             type: String,
             required: true
         },

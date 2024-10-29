@@ -1,7 +1,7 @@
 <template>
     <div class="section-input">
         <label class="label-input" :for="id">{{ label }}</label>
-        <input class="input" :type="type" :name="id" :id="id">
+        <input class="input" :type="type" :name="id" :id="id" :class="class">
     </div>
 </template>
 <script>
@@ -24,6 +24,10 @@ export default {
             type: String,
             default: 'Default',
             required: true
+        },
+        class:{
+            type: String,
+            required: false
         },
     }
 }
