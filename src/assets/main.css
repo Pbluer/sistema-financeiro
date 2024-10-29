@@ -24,12 +24,13 @@
     
 }
 
+.row{
+    @apply flex flex-col justify-center items-center
+        sm:gap-4 sm:flex-row;
+}
+
 .section-input{
-    @apply w-80 flex flex-col items-start my-2
-        sm:w-[25rem]
-        md:w-[34rem]
-        lg:w-[30rem];
-    
+    @apply flex flex-col items-start my-2;    
 }
 
 .input{

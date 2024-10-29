@@ -16,6 +16,7 @@ import buttonBase from '@/components/base/buttonBase.vue';
 import inputBase from '@/components/base/inputBase.vue';
 import linkButtonBase from '@/components/base/linkButtonBase.vue';
 import selectBase from '@/components/base/selectBase.vue';
+import InputNumberBase from '@/components/base/inputNumberBase.vue';
 
 app.component('LogoIcon', logoIcon)
     .component('MenuLateral',menuLateral)
@@ -23,6 +24,7 @@ app.component('LogoIcon', logoIcon)
     .component('InputBase',inputBase)
     .component('LinkButtonBase',linkButtonBase)
     .component('SelectBase',selectBase)
+    .component('InputNumberBase',InputNumberBase)
 
 app.config.globalProperties.userName = 'Ramon'
 

@@ -1,7 +1,7 @@
 <template>
     <div class="section-input">
-        <label class="label-input" :for="id">{{ label ? '&nbsp;' : '' }}</label>
-        <button :class="class" :id="id" :type="type"> {{descricao}} </button>
+        <label class="label-input" :for="id">{{ label }}</label>
+        <input class="input" :type="type" :name="id" :id="id" :min="min" :max="max">
     </div>
 </template>
 <script>
@@ -9,26 +9,31 @@ export default {
     props:{
         id:{
             type: String,
-            required: false
+            required: true
         },
         type:{
             type: String,
             default: 'button',
+            required: true
+        },
+        descricao:{
+            type: String,
             required: false
         },
         label:{
             type: String,
-            required: false
-        },
-        descricao:{
-            type: String,
+            default: 'Default',
             required: true
         },
-        class: {
+        min:{
             type: String,
-            default: 'button-primary',
+            default: 0,
+            required: true
+        },
+        max:{
+            type: String,
             required: false
-        }
+        },
     }
 }
 </script>

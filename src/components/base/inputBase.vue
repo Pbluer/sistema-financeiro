@@ -16,6 +16,10 @@ export default {
             default: 'button',
             required: true
         },
+        descricao:{
+            type: String,
+            required: false
+        },
         label:{
             type: String,
             default: 'Default',

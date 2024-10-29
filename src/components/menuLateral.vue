@@ -47,7 +47,7 @@ import CodigoBarra from "@/components/icons/codigoBarraIcon.vue"
                     </div>                
                 </router-link>
 
-                <router-link :to="{ name:'inicio'}" class="flex flex-row w-full border-b-2 h-[55px]
+                <router-link :to="{ name:'mercadoCadastro'}" class="flex flex-row w-full border-b-2 h-[55px]
                     hover:bg-blue-950">
                     <div class="h-full flex items-center justify-center px-5 py-4 w-20">
                         <CodigoBarra class="fill-white "/> 

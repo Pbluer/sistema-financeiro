@@ -17,6 +17,8 @@ const router = createRouter({
       name: 'inicio',
       component: () => import('../views/inicialView.vue')
     },
+
+    // Cartao
     {
       path: '/cartao',
       name: 'cartao',
@@ -35,6 +37,8 @@ const router = createRouter({
       ]
       
     },
+
+    // Compras
     {
       path: '/compras',
       name: 'compras',
@@ -52,6 +56,13 @@ const router = createRouter({
         },
       ]
       
+    },
+
+    // Mercado
+    { 
+      path:'/mercado',
+      name: 'mercadoCadastro',
+      component: () => import('../views/mercado/mercadoCadastroView.vue') 
     }
   ]
 })

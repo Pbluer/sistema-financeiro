@@ -13,7 +13,7 @@
                 <SelectBase id="ativo" label="Ativo" :option="[ { value: 1, descricao: 'Sim'}, { value: 0, descricao: 'Não'}]"/>
 
                 <div class="mt-5">
-                    <ButtonBase label="Cadastrar" />
+                    <ButtonBase descricao="Cadastrar" />
                 </div>
             </div>
         </form>

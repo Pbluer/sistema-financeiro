@@ -5,7 +5,7 @@
         <div class="content">
 
             <div class="border-b-2 border-blue-700 mb-5 pb-5">
-                <ButtonBase id="pesquisar" type="text" label="Cadastrar" @click=" () => $router.push({ name: 'cartaoCadastro'})"/>
+                <ButtonBase id="pesquisar" type="text" titulo="Cadastrar" @click=" () => $router.push({ name: 'cartaoCadastro'})"/>
             </div>
 
             <div>
