@@ -8,7 +8,11 @@
             </div>
 
             <div class="form">
-                <InputTextBase id="descricao" label="Descrição"/>
+
+                <div class="section-input">
+                    <label class="label-input" for="descricao">Descrição</label>
+                    <input type="text" name="descricao" id="descricao" class="input input-width">
+                </div>
                 
                 <SelectBase id="ativo" label="Ativo" :option="[ { value: 1, descricao: 'Sim'}, { value: 0, descricao: 'Não'}]"/>
 

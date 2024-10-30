@@ -6,9 +6,16 @@
                 <LogoIcon class="w-[15rem]"/>
             </div>
             
-            <div class="flex flex-col items-center w-full">
-                <InputBase id="email" type="text" label="E-mail" />
-                <InputBase id="senha" type="senha" label="Senha" />
+            <div class="flex flex-col items-center w-full gap-y-2">
+                <div class="section-input">
+                    <label class="label-input" for="email">E-mail</label>
+                    <input type="text" name="email" id="email" v-model="email" class="input input-width">
+                </div>
+
+                <div class="section-input">
+                    <label class="label-input" for="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" v-model="senha" class="input input-width">
+                </div>               
             </div>
 
             <div class="flex justify-center">
@@ -20,6 +27,12 @@
 
 <script>
 export default {
+    data(){
+        return {
+            email: null,
+            senha: null
+        }
+    },
     methods:{
         logar(){
             this.$router.push('/inicio');
