@@ -60,9 +60,9 @@ $.extend( true, DataTable.defaults, {
 
 // Default class modification
 $.extend( true, DataTable.ext.classes, {
-	container: "dt-container dt-tailwindcss max-w-[85vw] flex flex-col m-auto",
+	container: "dt-container dt-tailwindcss flex flex-col m-auto",
 	search: {
-		input: "ml-2 p-2 rounded-xl border-2 focus:outline-none "
+		input: "mx-auto p-2 rounded-xl border-2 focus:outline-none "
 	},
 	length: {
 		select: "border px-3 p-2 rounded-lg border-blue-60 focus:outline-none"
@@ -79,7 +79,7 @@ $.extend( true, DataTable.ext.classes, {
 		enabled: 'text-blue-700 hover:border-gray-300 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25',
 		notEnabled: 'text-blue-700'
 	},
-	table: 'dataTable text-sm whitespace-nowrap ',
+	table: 'dataTable text-sm whitespace-nowrap',
 	thead: {
 		row: 'border-b-2 border-blue-700 ',
 		cell: 'px-3 py-4 text-gray-900 bg-gray-100/75 font-semibold text-left '

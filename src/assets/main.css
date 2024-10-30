@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .content{
-    @apply w-full px-5 py-6 mt-10;
+    @apply w-full px-5 mt-10 md:py-6;
 }
 
 .content-form{
-    @apply w-full mt-10 px-10 py-6 flex flex-col items-center;
+    @apply w-full mt-10 flex flex-col items-center md:py-6 md:px-10;
 }
 
 .main{

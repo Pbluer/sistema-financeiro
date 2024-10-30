@@ -3,34 +3,36 @@
         <MenuLateral />
 
         <div class="content">
+            <div class="form">
+                <div class="border-b-2 border-blue-700 mb-5 pb-5 w-full">
+                    <ButtonBase id="pesquisar" type="text" titulo="Cadastrar" @click=" () => $router.push({ name: 'comprasCadastro'})"/>
+                </div>
+    
+                <div class="overflow-x-auto">
+                    <table id="example">
+                        <thead>
+                            <tr>
+                                <th class="w-[10px]"></th>
+                                <th>Período</th>
+                                <th>Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td > <ButtonBase id="pesquisar" type="text" titulo="Acessar"/> </td>
+                                <td> 00/00/0000 à 00/00/000 </td>
+                                <td>2</td>
+                            </tr>                        
+                        </tbody>
+                    </table>
+                </div>
 
-            <div class="border-b-2 border-blue-700 mb-5 pb-5">
-                <ButtonBase id="pesquisar" type="text" titulo="Cadastrar" @click=" () => $router.push({ name: 'comprasCadastro'})"/>
-            </div>
-
-            <div>
-                <table id="example">
-                    <thead>
-                        <tr>
-                            <th class="w-[10px]"></th>
-                            <th>Período</th>
-                            <th>Quantidade</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td > <ButtonBase id="pesquisar" type="text" titulo="Acessar"/> </td>
-                            <td> 00/00/0000 à 00/00/000 </td>
-                            <td>2</td>
-                        </tr>                        
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
 </template>
 <script>
-import "@/assets/js/dataTable/jquery";
+import "@/assets/js/jquery";
 import "@/assets/js/dataTable/dataTable.js";
 import "@/assets/js/dataTable/dataTableTailwind.js";
 

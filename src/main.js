@@ -1,6 +1,7 @@
 import "animate.css"
 import './assets/main.css'
-
+import './assets/js/jquery'
+import './assets/js/jquery.mask'
 
 import { createApp } from 'vue'
 
