@@ -24,7 +24,7 @@
 
                     <div class="section-input">
                         <label class="label-input" for="valor">Valor</label>
-                        <input v-model="valorItem" type="text" name="valor" id="valor"
+                        <input v-model.lazy="valorItem" type="text" name="valor" id="valor"
                             class="input w-[90vw] sm:w-[10vw] md:w-[150px]">
                     </div>
 
@@ -33,6 +33,16 @@
                         @click="carregarItems()" />
                 </div>
                 <hr class="border-2 border-blue-700 w-[50vw] my-5">
+
+                <div>
+                    <div class="section-input">
+                        <label class="label-input" for="totalCompra">Total</label>
+                        <input v-model="totalValor" type="text" name="totalCompra" id="totalCompra" disabled
+                            class="input w-[90vw] sm:w-[40vw] md:w-[15vw]">
+                    </div>
+                </div>
+
+                <hr class="border-2 border-blue-700 w-[20vw] my-5">
 
                 <div class="overflow-x-auto w-[90vw] sm:w-[500px]">
                     <table id="example">
@@ -54,81 +64,26 @@
     </div>
 </template>
 <script>
+import '@/assets/js/utils'
 import "@/assets/js/dataTable/dataTable.js";
 import "@/assets/js/dataTable/dataTableTailwind.js";
 
 export default {
     mounted() {
-
         $('#valor').mask('000.000,00', { reverse: true });
 
         new $('#example').DataTable({
-            data: this.carrinhoItems,
-            paging: true,
-            searching: true,
-            columns: [
-                { "data": "item" },
-                { "data": "quantidade" },
-                { "data": "valor" },
-            ],
-            "oLanguage": {
-                "sSearch": "Pesquisar"
-            },
-            layout: {
-                topStart: '',
-                bottom: 'paging',
-                bottomStart: false,
-                bottomEnd: false
-            },
-            language: {
-                "info": "Total de items: _START_ a _END_ items",
-                "infoEmpty": "Nenhuma informação encontrada.",
-                "infoFiltered": "",
-                "loadingRecords": "Carregando...",
-                "paginate": {
-                    "first": "Primeiro",
-                    "last": "Último",
-                    "next": "Próximo",
-                    "previous": "Anterior"
-                },
-            }
-        });
-    },
-    data() {
-        return {
-            descricaoItem: null,
-            quantidadeItem: null,
-            valorItem: null,
-            carrinhoItems: [{
-                "item": 'Sabao',
-                "quantidade": '2',
-                "valor": '2'
-
-            }]
-        }
-    },
-    methods: {
-        carregarItems() {
-            this.carrinhoItems.push(
-                {
-                    "item": this.descricaoItem,
-                    "quantidade": this.quantidadeItem,
-                    "valor": this.valorItem,
-                }
-            );
-
-            new DataTable('#example', {
-                destroy: true,
+            destroy: true,
                 data: this.carrinhoItems,
                 paging: true,
-                searching: true,
+                searching: false,
                 columns: [
                     { "data": "item" },
                     { "data": "quantidade" },
-                    { "data": "valor" },
+                    { "data": "valorTotalFormatado" },
                 ],
                 "oLanguage": {
-                    "sSearch": "Pesquisar"
+                    "sSearch": "Pesquisar",
                 },
                 layout: {
                     topStart: '',
@@ -137,11 +92,68 @@ export default {
                     bottomEnd: false
                 },
                 language: {
-                    "info": "Total de items: _START_ a _END_ items",
-                    "infoEmpty": "Nenhuma informação encontrada.",
-                    "infoFiltered": "",
-                    "loadingRecords": "Carregando...",
-                    "paginate": {
+                    info: "Total de items: _START_ a _END_ items",
+                    infoEmpty: "Nenhuma informação encontrada.",
+                    infoFiltered : " ",
+                    loadingRecords: "Carregando...",
+                    emptyTable: ' ',
+                    paginate: {
+                        "first": "Primeiro",
+                        "last": "Último",
+                        "next": "Próximo",
+                        "previous": "Anterior"
+                    },
+                }
+        });
+    },
+    data() {
+        return {
+            descricaoItem: null,
+            quantidadeItem: null,
+            valorItem: null,
+            totalValor: null,
+            carrinhoItems: [],
+        }
+    },
+    methods: {
+        carregarItems() {
+            let valorTotal = formataBRL( this.quantidadeItem * parseFloat(this.valorItem) );
+
+            this.carrinhoItems.push(
+                {
+                    "item": this.descricaoItem,
+                    "quantidade": this.quantidadeItem,
+                    "valor": valorTotal,
+                    "valorTotalFormatado": `R$ ${valorTotal}`
+                }
+            );            
+
+            new DataTable('#example', {
+                destroy: true,
+                data: this.carrinhoItems,
+                paging: true,
+                searching: false,
+                columns: [
+                    { "data": "item" },
+                    { "data": "quantidade" },
+                    { "data": "valorTotalFormatado" },
+                ],
+                "oLanguage": {
+                    "sSearch": "Pesquisar",
+                },
+                layout: {
+                    topStart: '',
+                    bottom: 'paging',
+                    bottomStart: false,
+                    bottomEnd: false
+                },
+                language: {
+                    info: "Total de items: _START_ a _END_ items",
+                    infoEmpty: "Nenhuma informação encontrada.",
+                    infoFiltered : "",
+                    loadingRecords: "Carregando...",
+                    emptyTable: 'No data aaaaa in table',
+                    paginate: {
                         "first": "Primeiro",
                         "last": "Último",
                         "next": "Próximo",
@@ -149,6 +161,13 @@ export default {
                     },
                 }
             });
+
+            this.limparCampos()           
+        },
+        limparCampos(){
+            this.descricaoItem = null;
+            this.quantidadeItem = null;
+            this.valorItem = null;
         }
     }
 }

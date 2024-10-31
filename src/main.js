@@ -1,8 +1,7 @@
 import "animate.css"
 import './assets/main.css'
 import './assets/js/jquery'
-import './assets/js/jquery.mask'
-
+import './assets/js/jquery.mask.js'
 import { createApp } from 'vue'
 
 import App from './App.vue'
@@ -29,7 +28,9 @@ app.component('LogoIcon', logoIcon)
     .component('InputNumberBase',inputNumberBase)
     .component('InputTextBase',inputTextBase)
 
-app.config.globalProperties.userName = 'Ramon'
+app.config.globalProperties.userName = 'Ramon';
+
+//app.config.globalProperties.formataBRL = (valor) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' } ).format(valor)
 
 app.use(router)
 
