@@ -29,6 +29,7 @@ app.component('LogoIcon', logoIcon)
     .component('InputTextBase',inputTextBase)
 
 import utils from './assets/js/utils'
+import './registerServiceWorker'
 
 
 //app.config.globalProperties.formataBRL = (valor) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' } ).format(valor)
