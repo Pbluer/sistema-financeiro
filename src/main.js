@@ -28,10 +28,12 @@ app.component('LogoIcon', logoIcon)
     .component('InputNumberBase',inputNumberBase)
     .component('InputTextBase',inputTextBase)
 
-app.config.globalProperties.userName = 'Ramon';
+import utils from './assets/js/utils'
+
 
 //app.config.globalProperties.formataBRL = (valor) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' } ).format(valor)
 
 app.use(router)
+    .use(utils)
 
 app.mount('#app')
