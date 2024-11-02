@@ -19,15 +19,18 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td > <ButtonBase id="pesquisar" type="text" titulo="Acessar"/> </td>
+                                <td> <ButtonBase id="pesquisar" type="text" titulo="Acessar"/> </td>
                                 <td> 00/00/0000 à 00/00/000 </td>
                                 <td>2</td>
                             </tr>                        
                         </tbody>
                     </table>
                 </div>
-
             </div>
+            <ModalBase>
+                <teleport to="modalText">Texto</teleport>
+            </ModalBase>
+            
         </div>
     </div>
 </template>
