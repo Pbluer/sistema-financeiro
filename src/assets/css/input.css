@@ -1,0 +1,19 @@
+
+.section-input{
+    @apply flex flex-col items-start;    
+}
+
+.input{
+    @apply p-2 my-1 rounded-lg border border-gray-200 border-solid focus:outline-none shadow-sm;
+}
+
+.select{
+    @apply bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer;
+}
+
+.input-width{
+    @apply w-[80vw] sm:w-[70vw]
+    md:w-[50vw]
+    lg:w-[400px]
+    ;
+}

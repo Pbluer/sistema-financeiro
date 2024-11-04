@@ -1,31 +1,28 @@
 <template>
-    <div class="flex justify-center items-center left-0 top-0 absolute bg-gray-700 bg-opacity-15 w-full h-full p-10">
-
-      <div class="bg-white w-[20vw] flex flex-col z-50">
-        <div class="flex flex-row px-2 justify-evenly">
-            <div>
-                <teleport to='modalText'>
-                    <h1>Default Name</h1>
-                </teleport>
-
-            </div>
-            <div class="">
-                <BaseButton>X</BaseButton>
-            </div>
+  <teleport to='body'>
+    <div class="modal">
+      <div class="modal-main">
+        <div class="modal-header">
+          <div class="w-[30vw]">
+            <h1>
+              <slot name="titulo">Default Name</slot>
+            </h1>
+          </div>
+          <div>
+            <button class="text-lg" @click="$emit('fechar')">X</button>
+          </div>
         </div>
-        <h1 class="text-red-500">teste</h1>
-        <h1>teste</h1>
-        <h1>teste</h1>
-        <h1>teste</h1>
-        <h1>teste</h1>
-        <h1>teste</h1>
-        <h1>teste</h1>
-      </div>
+        <hr class="h-1 my-2 bg-blue-700">
 
+        <div class="modal-body">
+          <slot name="body"></slot>
+        </div>
+      </div>
     </div>
+  </teleport>
 </template>
 <script>
-export default {
-    
+export default{
+  emits:['fechar']
 }
 </script>

@@ -23,8 +23,10 @@ app.component('LogoIcon', logoIcon)
     .component('ModalBase',modalBase)
 
 import utils from './assets/js/utils'
+import globalVariable from './assets/js/globalVariable'
 
 app.use(router)
     .use(utils)
+    .use(globalVariable)
 
 app.mount('#app')

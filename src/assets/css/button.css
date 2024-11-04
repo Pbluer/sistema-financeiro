@@ -1,0 +1,9 @@
+
+.button-primary{
+    @apply px-4 py-2 border-2 border-blue-600 rounded-lg bg-blue-600 text-white text-sm hover:border-gray-700 hover:outline-none shadow-sm;
+}
+
+.button-success{
+    @apply px-4 py-2 border-2 border-green-600 rounded-lg bg-green-600 text-white text-sm hover:border-gray-700 hover:outline-none shadow-sm;
+}
+
