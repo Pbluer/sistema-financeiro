@@ -22,18 +22,13 @@ const router = createRouter({
     {
       path: '/cartao',
       name: 'cartao',
-      component: () => import('../views/cartao/indexCartaoView.vue'),
+      redirect: { name: 'cartaoFiltro' },
       children:[
         { 
           path:'filtro',
           name: 'cartaoFiltro',
           component: () => import('../views/cartao/cartaoFiltroView.vue') 
-        },
-        { 
-          path:'cadastro',
-          name: 'cartaoCadastro',
-          component: () => import('../views/cartao/cartaoCadastroView.vue') 
-        },
+        }
       ]
       
     },
@@ -42,17 +37,12 @@ const router = createRouter({
     {
       path: '/compras',
       name: 'compras',
-      component: () => import('../views/compras/indexComprasView.vue'),
+      redirect: { name: 'comprasFiltro' },
       children:[
         { 
           path:'filtro',
           name: 'comprasFiltro',
           component: () => import('../views/compras/comprasFiltroView.vue') 
-        },
-        { 
-          path:'cadastro',
-          name: 'comprasCadastro',
-          component: () => import('../views/compras/comprasCadastroView.vue') 
         },
       ]
       

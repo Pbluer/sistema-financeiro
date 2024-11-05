@@ -4,7 +4,7 @@
       <div class="modal-main">
         <div class="modal-header">
           <div class="w-[30vw]">
-            <h1>
+            <h1 class="font-bold text-lg">
               <slot name="titulo">Default Name</slot>
             </h1>
           </div>
