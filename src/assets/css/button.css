@@ -7,3 +7,7 @@
     @apply px-4 py-2 border-2 border-green-600 rounded-lg bg-green-600 text-white text-sm hover:border-gray-700 hover:outline-none shadow-sm;
 }
 
+.button-link{
+    @apply px-4 py-2 text-blue-600 underline text-lg ;
+}
+

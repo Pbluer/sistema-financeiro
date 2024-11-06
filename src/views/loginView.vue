@@ -18,7 +18,8 @@
                 </div>               
             </div>
 
-            <div class="flex justify-center">
+            <div class="flex justify-between w-[350px]">
+                <router-link :to="{ name: 'cadastrarUsuario' }" class="button-link">Cadastrar-se</router-link>
                 <ButtonBase @click="logar" titulo="ACESSAR"/>                
             </div>
         </form>

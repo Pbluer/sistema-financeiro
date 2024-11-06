@@ -17,3 +17,53 @@
     lg:w-[400px]
     ;
 }
+
+
+
+.col{
+    @apply w-[90vw];
+}
+
+.col-1{
+    @apply w-[150px];
+}
+
+.col-2{
+    @apply w-[200px];
+}
+
+.col-3{
+    @apply w-[250px];
+}
+
+.col-3{
+    @apply w-[300px];
+}
+
+.col-4{
+    @apply w-[350px];
+}
+
+.col-5{
+    @apply w-[400px];
+}
+
+.col-6{
+    @apply w-[450px];
+}
+
+.col-7{
+    @apply w-[500px];
+}
+
+.col-8{
+    @apply w-[550px];
+}
+
+.col-9{
+    @apply w-[600px];
+}
+
+.col-10{
+    @apply w-[650px];
+}

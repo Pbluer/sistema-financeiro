@@ -12,12 +12,7 @@
 }
 
 .form{
-    @apply flex flex-col items-center px-4 py-2 gap-y-3 columns-12
-        xl:columns-10
-        lg:columns-8
-        md:columns-4
-        sm:columns-2
-    ;    
+    @apply flex flex-col items-center px-4 py-2 gap-y-3;
 }
 
 .row{

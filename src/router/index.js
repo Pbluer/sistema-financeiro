@@ -9,13 +9,18 @@ const router = createRouter({
     },
     {
       path: '/login',
-      name: 'login',
+      name: 'loginUsuario',
       component: () => import('../views/loginView.vue')
     },
     {
       path: '/inicio',
       name: 'inicio',
       component: () => import('../views/inicialView.vue')
+    },
+    {
+      path: '/cadastrar',
+      name: 'cadastrarUsuario',
+      component: () => import('../views/cadastrarView.vue')
     },
 
     // Cartao
