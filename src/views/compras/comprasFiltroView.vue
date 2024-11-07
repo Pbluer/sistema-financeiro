@@ -8,7 +8,10 @@
                     <ButtonBase id="pesquisar" type="text" titulo="Cadastrar" @click=" () => showModal = true" />
                 </div>
 
-                <div class="overflow-x-auto">
+                <div class="overflow-x-auto w-[90vw] 
+                    sm:w-[35rem]
+                    md:w-[40rem]
+                    lg:w-[55rem]">
                     <table id="example">
                         <thead>
                             <tr>

@@ -6,7 +6,7 @@ export default {
   ],
   theme: {
     extend: {
-      display: ["group-hover"],
+      display: ["group-hover"]
     },
   },
   plugins: [],

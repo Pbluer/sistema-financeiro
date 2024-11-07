@@ -9,7 +9,10 @@
                         @click="() => showModal = true" />
                 </div>
 
-                <div class="overflow-x-auto w-[45vw]">
+                <div class="overflow-x-auto w-[90vw] 
+                    sm:w-[35rem]
+                    md:w-[40rem]
+                    lg:w-[55rem]">
                     <table id="example">
                         <thead>
                             <tr>

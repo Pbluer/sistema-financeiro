@@ -33,7 +33,10 @@
             <hr class="border-2 border-blue-700 w-[50vw] my-5">
 
 
-            <div class="overflow-x-auto w-[90vw] sm:w-[500px]">
+            <div class="overflow-x-auto w-[90vw] 
+                    sm:w-[35rem]
+                    md:w-[40rem]
+                    lg:w-[55rem]">
                 <table id="example">
                     <thead>
                         <tr>

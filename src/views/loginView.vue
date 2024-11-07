@@ -9,16 +9,18 @@
             <div class="flex flex-col items-center w-full gap-y-2">
                 <div class="section-input">
                     <label class="label-input" for="email">E-mail</label>
-                    <input type="text" name="email" id="email" v-model="email" class="input input-width">
+                    <input type="text" name="email" id="email" v-model="email" class="input w-[80vw]
+                        sm:w-[25rem]">
                 </div>
 
                 <div class="section-input">
                     <label class="label-input" for="senha">Senha</label>
-                    <input type="password" name="senha" id="senha" v-model="senha" class="input input-width">
+                    <input type="password" name="senha" id="senha" v-model="senha" class="input w-[80vw]
+                        sm:w-[25rem]">
                 </div>               
             </div>
 
-            <div class="flex justify-between w-[350px]">
+            <div class="flex flex-col-reverse items-center mt-5">
                 <router-link :to="{ name: 'cadastrarUsuario' }" class="button-link">Cadastrar-se</router-link>
                 <ButtonBase @click="logar" titulo="ACESSAR"/>                
             </div>

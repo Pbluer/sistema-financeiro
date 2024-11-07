@@ -9,37 +9,41 @@
       <div class="row">
         <div class="section-input">
           <label class="label-input" for="email">E-mail</label>
-          <input type="text" name="email" id="email" v-model="email" class="input col
-          md:col-2">
+          <input type="text" name="email" id="email" v-model="email" class="input w-[80vw]
+            sm:w-[30rem]">
         </div>
       </div>
 
       <div class="row">
         <div class="section-input">
           <label class="label-input" for="senha">Senha</label>
-          <input type="password" name="senha" id="senha" v-model="senha" class="input col-4">
+          <input type="password" name="senha" id="senha" v-model="senha" class="input w-[80vw]
+            sm:w-[14.6rem]">
         </div>
 
         <div class="section-input">
           <label class="label-input" for="confirmarSenha">Confimar Senha</label>
-          <input type="password" name="confirmarSenha" id="confirmarSenha" v-model="confirmarSenha" class="input col-4">
+          <input type="password" name="confirmarSenha" id="confirmarSenha" v-model="confirmarSenha" class="input w-[80vw]
+            sm:w-[14.6rem]">
         </div>
       </div>
       
       <div class="row">
         <div class="section-input">
           <label class="label-input" for="nome">Nome</label>
-          <input type="password" name="nome" id="nome" v-model="nome" class="input col-4">
+          <input type="password" name="nome" id="nome" v-model="nome" class="input w-[80vw]
+            sm:w-[14.6rem]">
         </div>
 
         <div class="section-input">
           <label class="label-input" for="sobrenome">Sobrenome</label>
-          <input type="password" name="sobrenome" id="sobrenome" v-model="confirmarSenha" class="input col-4">
+          <input type="password" name="sobrenome" id="sobrenome" v-model="confirmarSenha" class="input w-[80vw]
+            sm:w-[14.6rem]">
         </div>
       </div>
 
-      <div class="flex justify-between w-[350px]">
-        <ButtonBase @click="logar" titulo="Concluir" />
+      <div class="flex justify-center mt-5">
+        <ButtonBase @click="cadastrar" titulo="Concluir" />
       </div>
     </form>
   </div>
@@ -56,8 +60,8 @@ export default {
       }
   },
   methods:{
-      logar(){
-          this.$router.push('/inicio');
+      cadastrar(){
+        this.$router.push('/login');
       }
   }
 }
