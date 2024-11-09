@@ -16,17 +16,19 @@ import logoIcon from '@/components/icons/logoIcon.vue'
 import menuLateral from '@/components/menuLateral.vue'
 import buttonBase from '@/components/base/buttonBase.vue'
 import modalBase from '@/components/base/modalBase.vue'
+import alertBase from '@/components/base/alertBase.vue'
 
-app.component('LogoIcon', logoIcon)
-    .component('MenuLateral',menuLateral)
-    .component('ButtonBase',buttonBase)
-    .component('ModalBase',modalBase)
+app.component( 'LogoIcon', logoIcon )
+    .component( 'MenuLateral',menuLateral )
+    .component( 'ButtonBase',buttonBase )
+    .component( 'ModalBase',modalBase )
+    .component( 'Alert',alertBase )
 
 import utils from './assets/js/utils'
 import globalVariable from './assets/js/globalVariable'
 
 app.use(router)
-    .use(utils)
     .use(globalVariable)
+    .use(utils)
 
 app.mount('#app')
