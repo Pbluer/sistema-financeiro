@@ -1,5 +1,5 @@
 <template>
-    <div :class="setClass(type)" class="absolute right-2 top-5 rounded-lg p-3 w-[250px] shadow-xl animate__animated animate__fadeIn">
+    <div :class="setClass(type)" class="absolute right-2 top-5 rounded-lg p-3 w-auto shadow-xl animate__animated animate__fadeIn">
         <h1 class="text-start font-bold">
             {{ titulo }}
         </h1>
@@ -28,7 +28,7 @@ export default {
     methods:{
         setClass(value){
 
-            if( value == 'faild'){
+            if( value == 'error'){
                 return 'border-1 border-red-200 bg-red-600 text-white'
             }
 
