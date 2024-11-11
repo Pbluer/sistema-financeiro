@@ -18,13 +18,13 @@
       <div class="row">
         <div class="section-input">
           <label class="label-input" for="senha">Senha</label>
-          <input type="password" name="senha" ref="senha" v-model.trim="senha.value" class="input w-[80vw]
+          <input type="password" autocomplete="off" name="senha" ref="senha" v-model.trim="senha.value" class="input w-[80vw]
             sm:w-[14.6rem]">
         </div>
 
         <div class="section-input">
           <label class="label-input" for="confirmarSenha">Confimar Senha</label>
-          <input type="password" name="confirmarSenha" ref="confirmarSenha" v-model.trim="confirmarSenha.value" class="input w-[80vw]
+          <input type="password" autocomplete="off" name="confirmarSenha" ref="confirmarSenha" v-model.trim="confirmarSenha.value" class="input w-[80vw]
             sm:w-[14.6rem]">
         </div>
       </div>
@@ -41,6 +41,7 @@
           <input type="text" name="sobrenome" ref="sobrenome" v-model.trim="sobrenome.value" class="input w-[80vw]
             sm:w-[14.6rem]">
         </div>
+
       </div>
 
       <div class="flex justify-center mt-5">
@@ -51,10 +52,7 @@
 </template>
 
 <script>
-import { useGlobalVariableState } from '@/stores/globalVariable.js'
 import axios from 'axios';
-
-const globalVariable = useGlobalVariableState()
 
 export default {
   data(){
@@ -88,19 +86,21 @@ export default {
       }
   },
   methods:{
-      async cadastrar(){
-        console.log(this.name)
-
+    async cadastrar(){
+      
         if( !this.validarFormulario() ) return;
 
-        let formData = new FormData( $('#formLogin')[0] )
         let resultado = await axios({
           method:'post',
-          url:'/usuario',
-          baseURL: this.$baseURL,
-          data: formData
+          url:this.$pinia.state.value.variaveisGlobal.baseUrl +'/usuario',         
+          data: {
+            nome: this.nome.value,
+            sobrenome: this.sobrenome.value,
+            email: this.email.value,
+            senha: this.senha.value,
+            confirmarSenha: this.confirmarSenha.value,
+          }
         })
-
       },
       validarFormulario(){
         

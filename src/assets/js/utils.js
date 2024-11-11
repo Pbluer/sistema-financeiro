@@ -5,7 +5,6 @@ export default {
                 { style: 'currency', currency: 'BRL' }
             ).format(valor)
         },
-        app.config.globalProperties.baseUrl = 'localhost:8081/',
         app.config.globalProperties.validarEmail = (email) =>{
             let regex =  (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*$/);
             return regex.test(email)
