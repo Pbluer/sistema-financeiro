@@ -7,6 +7,7 @@ import './registerServiceWorker'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia';
 import { useGlobalVariableState } from "./stores/globalVariable"
+import { useUsuarioLogado } from "./stores/usuarioLogado"
 import App from './App.vue'
 import router from './router'
 
@@ -31,5 +32,6 @@ import utils from './assets/js/utils';
 app.use(router).use(pinia).use(utils)
 
 app.config.globalProperties.global= useGlobalVariableState();
+app.config.globalProperties.global= useUsuarioLogado();
 
 app.mount('#app')
