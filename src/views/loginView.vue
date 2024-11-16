@@ -1,5 +1,5 @@
 <template>
-    <Alert v-show="alert.show" :descricao="alert.descricao" :titulo="alert.titulo" :type="alert.type" />s
+    <Alert v-show="alert.show" :descricao="alert.descricao" :titulo="alert.titulo" :type="alert.type" />
     <div>
         <form id="formLogin" class="flex flex-col items-center gap-y-4">
 
@@ -30,12 +30,11 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { useGlobalVariableState } from "@/stores/globalVariable"
+
+const global = useGlobalVariableState();
 
 export default {
-    mounted(){
-        sessionStorage.removeItem('userToken')
-    },
     data() {
         return {
             alert: {
@@ -56,33 +55,26 @@ export default {
     },
     methods: {
         async acessar() {
-            console.log( this.$pinia )
-            return
             if (!this.validarFormulario()) return;
 
-            let resultado = await axios({
-                method: 'post',
-                url: '/usuario/acessar',
-                baseURL:this.$pinia.state.value.variaveisGlobal.baseUrl,
-                data: {
-                    email: this.email.value,
-                    senha: this.senha.value,
-                }
-            })
-
+            let resultado = await this.$axios.post('/usuario/acessar', {
+                email: this.email.value,
+                senha: this.senha.value,
+            });
             let { status, mensage, data } = resultado.data;
-            if (status > 200) {
+
+            if (status > 299) {
                 this.showAlert('error', 'Atenção', mensage);
             }
 
-            if (status < 400) {
-               
-                this.$pinia.state.value.usuarioLogado.setCodigo(data.nome)
-                
+            if(status < 400){
+                global.setUserName(data.nome);
+                global.setTokenUser(data.token);
+
                 sessionStorage.setItem('userToken', data.token);
                 this.showAlert('success', 'Atenção', mensage);
                 setTimeout(() => this.$router.push('/inicio') , 1500);
-            }            
+            }
 
         },
         validarFormulario() {

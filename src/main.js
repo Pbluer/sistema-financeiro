@@ -7,12 +7,13 @@ import './registerServiceWorker'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia';
 import { useGlobalVariableState } from "./stores/globalVariable"
-import { useUsuarioLogado } from "./stores/usuarioLogado"
+
 import App from './App.vue'
 import router from './router'
+import axios from 'axios'
 
 const pinia  = createPinia();
-const app = createApp(App)
+const app = createApp(App);
 
 //Cadastra os componentes global
 import logoIcon from '@/components/icons/logoIcon.vue'
@@ -22,7 +23,7 @@ import modalBase from '@/components/base/modalBase.vue'
 import alertBase from '@/components/base/alertBase.vue'
 
 app.component( 'LogoIcon', logoIcon )
-    .component( 'MenuLateral',menuLateral )
+    .component( 'MenuLateral',menuLateral ) 
     .component( 'ButtonBase',buttonBase )
     .component( 'ModalBase',modalBase )
     .component( 'Alert',alertBase )
@@ -31,7 +32,12 @@ import utils from './assets/js/utils';
 
 app.use(router).use(pinia).use(utils)
 
-app.config.globalProperties.global= useGlobalVariableState();
-app.config.globalProperties.global= useUsuarioLogado();
+
+const instanceAxios = axios.create({
+    baseURL: useGlobalVariableState().$state.baseURL,
+    headers: { "Content-Type": 'application/json' }
+});
+
+app.config.globalProperties.$axios = { ...instanceAxios };
 
 app.mount('#app')

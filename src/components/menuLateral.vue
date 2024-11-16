@@ -1,11 +1,16 @@
-
 <script setup>
+import { useGlobalVariableState } from "@/stores/globalVariable"
+
 import PersonIcon from "@/components/icons/personIcon.vue"
 import HomeIcon from "@/components/icons/homeIcon.vue"
 import WalletIcon from "@/components/icons/walletIcon.vue"
 import MenuIcon from "@/components/icons/menuIcon.vue"
 import CarrinhoMercado from "@/components/icons/carrinhoMercadoIcon.vue"
 import CodigoBarra from "@/components/icons/codigoBarraIcon.vue"
+import ExitDoor from "@/components/icons/exitIcon.vue"
+
+
+const global = useGlobalVariableState();
 </script>
 <template>
     
@@ -22,10 +27,20 @@ import CodigoBarra from "@/components/icons/codigoBarraIcon.vue"
 
                 <div class="my-5 text-center">
                     <h1 class="text-xl text-white font-medium underline">Bem-vindo</h1>
-                    <h1 class="text-xl text-white font-bold">{{ userName }}</h1>
+                    <h1 class="text-xl text-white font-bold">{{ global.$state.userName }}</h1>
                 </div>
                 
                 <hr class="w-full h-2 mx-auto mt-4 bg-white">                
+                
+                <router-link :to="{ name:'loginUsuario'}" class="flex flex-row w-full border-b-2 h-[55px]
+                    bg-white">
+                    <div class="h-full flex items-center justify-center px-5 py-4 w-20">
+                        <ExitDoor class="fill-blue-700 "/> 
+                    </div>
+                    <div class="flex justify-start items-center h-full w-25">
+                        <p class="font-medium text-blue-700 text-lg"> Deslogar-se </p>
+                    </div>                
+                </router-link>
                 
                 <router-link :to="{ name:'cartaoFiltro'}" class="flex flex-row w-full border-b-2 h-[55px]
                     hover:bg-blue-950">
