@@ -73,7 +73,7 @@ import "@/assets/js/dataTable/dataTableTailwind.js";
 
 export default {
     mounted() {
-        $('#valor').mask('000.000,00', { reverse: true });
+        $('#valor').mask('#.##0,00', { reverse:true });
 
         new $('#example').DataTable({
             destroy: true,
@@ -179,9 +179,7 @@ export default {
 
             this.carrinhoItems.forEach( item => {
                 valorTotal += item.valorTotal 
-                console.log(item.valorTotal)
             });
-
 
             this.valorTotalCarinho = `R$ ${valorTotal}`
         }

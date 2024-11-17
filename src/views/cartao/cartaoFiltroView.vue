@@ -18,6 +18,7 @@
                                 <th class="w-[1rem] border-r-2"></th>
                                 <th class="w-[1rem] border-r-2">Codigo</th>
                                 <th class="w-[10rem] border-r-2">Descrição</th>
+                                <th class="w-[10rem] border-r-2">Limite</th>
                                 <th class="w-[10rem]">Ativo</th>
                             </tr>
                         </thead>
@@ -27,6 +28,7 @@
                             </td>
                             <td class="border-b-2 border-r-2 border-blue-600">{{ item.codigo }}</td>
                             <td class="border-b-2 border-r-2 border-blue-600">{{ item.descricao }}</td>
+                            <td class="border-b-2 border-r-2 border-blue-600">{{ formataBRL(item.limite) }}</td>
                             <td class="border-b-2 border-r-2 border-blue-600">{{ item.ativo.data[0] ? 'Sim' : 'Não' }}
                             </td>
                         </tbody>
@@ -37,13 +39,13 @@
         </div>
     </div>
 
-    <ModalBase @fechar="() => modalCartao.show = false" v-if="modalCartao.show">
+    <ModalBase @fechar="() => modalCartao.show = false" v-show="modalCartao.show">
         <template v-slot:titulo>Cartão</template>
         <template v-slot:body>
             <form class="form">
 
                 <div class="my-5">
-                    <h1 class="text-center font-bold text-xl">Cadastro</h1>
+                    <h1 class="text-center font-bold text-xl">{{ modalCartao.type == 'edit'? 'Alteração' : 'Cadastro'  }}</h1>
                 </div>
 
                 <div class="row">
@@ -54,7 +56,12 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="flex flex-col">
+                    <div class="section-input">
+                        <label class="label-input" for="limiteCartao">Limite</label>
+                        <input v-model.lazy="form.limite" type="text" ref="limiteCartao" id="limiteCartao"
+                            class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                    </div>
                     <div class="section-input" ref="sectionAtivo" v-show="modalCartao.type == 'edit'">
                         <label for="ativo" class="label-input">Ativo</label>
                         <select v-model.trim="form.ativo" id="ativo" ref="ativo" class=" input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
@@ -79,6 +86,7 @@ import "@/assets/js/dataTable/dataTableTailwind.js";
 
 export default {
     mounted() {
+        $('#limiteCartao').mask('#.###,00', { reverse:true })
         this.carregarListagem()
     },
     data() {
@@ -96,6 +104,7 @@ export default {
             form: {
                 codigo: 0,
                 descricao: null,
+                limite: null,
                 ativo: null
             },
             listagem: null
@@ -104,63 +113,32 @@ export default {
     methods: {
         async carregarListagem() {
 
-            let results = await this.$axios.get('/cartao/listagem');
+            try{
+                let results = await this.$axios.get('/cartao/listagem');
 
-            let { status, mensage, data } = results.data;
+                let { status, mensage, data } = results.data;
 
-            if (status == 200) {
-                this.listagem = data
-                /*   new $('#example').DataTable({
-                      destroy: true,
-                      data: this.listagem,
-                      paging: true,
-                      searching: true,
-                      columns: [
-                          { 
-                              "data": "codigo",
-                              render: (value,type) => {
-                                  return `<button class="button-primary" @click='abrir'> ${value} </button>`
-                              }
-                           },
-                          { "data": "descricao" },
-                          { 
-                              "data": "ativo",
-                              render: (value,type) =>{
-                                  return value.data[0] ? "Sim" : "Não"
-                              }
-                          },
-                      ],
-                      "oLanguage": {
-                          "sSearch": "Pesquisar",
-                      },
-                      layout: {
-                          topStart: '',
-                          bottom: 'paging',
-                          bottomStart: false,
-                          bottomEnd: false
-                      },
-                      language: { 
-                          info: "Total de items: _START_ a _END_ items",
-                          infoEmpty: "Nenhuma informação encontrada.",
-                          infoFiltered: " ",
-                          loadingRecords: "Carregando...",
-                          emptyTable: ' ',
-                          paginate: {
-                              "first": "Primeiro",
-                              "last": "Último",
-                              "next": "Próximo",
-                              "previous": "Anterior"
-                          },
-                      }
-                  }); */
-            }
+                if (status == 200) {
+                    this.listagem = data;
+                }
+
+                if( status >= 400 ){
+                    this.showAlert('error', 'Atenção', mensage);            
+                }
+                
+            }catch(err){
+                this.showAlert('error', 'Atenção', 'Entre em contato com o suporte.');            
+            }            
+           
         },
         editar(item) {
             this.form = {
                 codigo: item.codigo,
                 descricao: item.descricao,
+                limite: item.limite,
                 ativo: item.ativo.data[0]
             }
+            //console.log(formataBRL(item.limite,true))
 
             this.modalCartao = {
                 show: true,
@@ -175,8 +153,8 @@ export default {
 
             this.form =  {
                 codigo: 0,
-                descricao: null,
-                ativo: null
+                descricao: '',
+                ativo: 1
             }
         },
         async gravarModal(){
@@ -185,6 +163,7 @@ export default {
             let resultado = await this.$axios.post('/cartao', {
                 codigo: this.form.codigo,
                 descricao: this.form.descricao,
+                limite: this.form.limite,
                 ativo: this.form.ativo,
             });
 

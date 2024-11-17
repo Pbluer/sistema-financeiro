@@ -1,8 +1,8 @@
 export default {
     install(app){
-        app.config.globalProperties.formataBRL = (valor) => {
+        app.config.globalProperties.formataBRL = (valor,decimal = true) => {
             return new Intl.NumberFormat('pt-BR',
-                { style: 'currency', currency: 'BRL' }
+                { currency: 'BRL', style: decimal ? 'currency': 'decimal' }
             ).format(valor)
         },
         app.config.globalProperties.validarEmail = (email) =>{

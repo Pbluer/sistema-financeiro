@@ -1,5 +1,4 @@
 <template>
-  <teleport to='body'>
     <div class="modal">
       <div class="modal-main">
         <div class="modal-header">
@@ -19,7 +18,6 @@
         </div>
       </div>
     </div>
-  </teleport>
 </template>
 <script>
 export default{
