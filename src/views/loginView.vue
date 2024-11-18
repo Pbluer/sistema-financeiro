@@ -70,7 +70,6 @@ export default {
             if(status < 400){
                 global.setUserName(data.nome);
                 global.setTokenUser(data.token);
-
                 sessionStorage.setItem('userToken', data.token);
                 this.showAlert('success', 'Atenção', mensage);
                 setTimeout(() => this.$router.push('/inicio') , 1500);

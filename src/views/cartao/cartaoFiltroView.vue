@@ -138,8 +138,7 @@ export default {
                 limite: item.limite,
                 ativo: item.ativo.data[0]
             }
-            //console.log(formataBRL(item.limite,true))
-
+            
             this.modalCartao = {
                 show: true,
                 type: 'edit'

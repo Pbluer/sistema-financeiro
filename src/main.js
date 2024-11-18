@@ -32,10 +32,14 @@ import utils from './assets/js/utils';
 
 app.use(router).use(pinia).use(utils)
 
+let userToken = sessionStorage.getItem('userToken')
 
 const instanceAxios = axios.create({
     baseURL: useGlobalVariableState().$state.baseURL,
-    headers: { "Content-Type": 'application/json' }
+    headers: { 
+        "Content-Type": 'application/json',
+       'Authorization': userToken
+    },
 });
 
 app.config.globalProperties.$axios = { ...instanceAxios };

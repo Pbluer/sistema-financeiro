@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
   data() {
@@ -91,26 +90,26 @@ export default {
 
       if (!this.validarFormulario()) return;
 
-      let resultado = await axios({
-        method: 'post',
-        url: this.$pinia.state.value.variaveisGlobal.baseUrl + '/usuario',
-        data: {
+      let resultado = await this.$axios.post('/usuario',
+        {
           nome: this.nome.value,
           sobrenome: this.sobrenome.value,
           email: this.email.value,
           senha: this.senha.value,
           confirmarSenha: this.confirmarSenha.value,
         }
-      })
+      )
 
       let { status, mensage, data } = resultado.data;
 
-      if (status > 200) {
+      if (status > 200) {        
         this.showAlert('error', 'Atenção', mensage);
       }
 
       if (status < 400) {
         this.showAlert('success', 'Atenção', mensage);
+
+        setTimeout(() => this.$router.push('/login') , 1500);
       }
 
     },

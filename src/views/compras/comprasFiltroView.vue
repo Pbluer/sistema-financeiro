@@ -87,7 +87,7 @@ import "@/assets/js/dataTable/dataTableTailwind.js";
 export default {
     mounted() {
         $('#limiteCartao').mask('#.###,00', { reverse:true })
-        this.carregarListagem()
+        //this.carregarListagem()
     },
     data() {
         return {

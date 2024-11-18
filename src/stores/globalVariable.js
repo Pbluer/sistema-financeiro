@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useGlobalVariableState = defineStore('variaveisGlobal',{
     // create the variable
     state:() => ({
-        userName: 'Ramon',
+        userName: null,
         baseURL:'http://192.168.0.128:8081',
         tokenUser: null
     }),
