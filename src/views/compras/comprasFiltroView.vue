@@ -16,13 +16,14 @@
                         <thead class="bg-blue-600 text-white">
                             <tr>
                                 <th class="w-[1rem] border-r-2"></th>
-                                <th class="w-[1rem] border-r-2">Codigo</th>
                                 <th class="w-[10rem] border-r-2">Descrição</th>
-                                <th class="w-[10rem] border-r-2">Limite</th>
-                                <th class="w-[10rem]">Ativo</th>
+                                <th class="w-[10rem] border-r-2">Valor</th>
+                                <th class="w-[10rem] border-r-2">Tipo</th>
+                                <th class="w-[10rem] border-r-2">Data de Cadastro</th>
                             </tr>
                         </thead>
                         <tbody v-for="item in listagem">
+                           <tr>
                             <td class="border-b-2 border-r-2 flex justify-center border-blue-600">
                                 <ButtonBase id="editar" titulo="Editar" @click="editar(item)" />
                             </td>
@@ -31,44 +32,55 @@
                             <td class="border-b-2 border-r-2 border-blue-600">{{ formataBRL(item.limite) }}</td>
                             <td class="border-b-2 border-r-2 border-blue-600">{{ item.ativo.data[0] ? 'Sim' : 'Não' }}
                             </td>
+                           </tr>
                         </tbody>
                     </table>
                 </div>
 
             </div>
         </div>
+
+
     </div>
 
-    <ModalBase @fechar="() => modalCartao.show = false" v-show="modalCartao.show">
+    <ModalBase @fechar="() => modalOperacao.show = false" v-show="modalOperacao.show">
         <template v-slot:titulo>Cartão</template>
         <template v-slot:body>
             <form class="form">
 
                 <div class="my-5">
-                    <h1 class="text-center font-bold text-xl">{{ modalCartao.type == 'edit'? 'Alteração' : 'Cadastro'  }}</h1>
+                    <h1 class="text-center font-bold text-xl">{{ modalOperacao.type == 'edit'? 'Alteração' : 'Cadastro'  }}</h1>
                 </div>
 
-                <div class="row">
+                <div class="flex flex-col gap-y-2">
                     <div class="section-input">
                         <label class="label-input" for="descricao">Descrição</label>
                         <input v-model.trim="form.descricao" type="text" ref="descricao" id="descricao"
                             class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
                     </div>
-                </div>
 
-                <div class="flex flex-col">
                     <div class="section-input">
-                        <label class="label-input" for="limiteCartao">Limite</label>
-                        <input v-model.lazy="form.limite" type="text" ref="limiteCartao" id="limiteCartao"
+                        <label class="label-input" for="valor">Valor</label>
+                        <input v-model.lazy="form.valor" type="text" ref="valor" id="valor"
                             class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
                     </div>
-                    <div class="section-input" ref="sectionAtivo" v-show="modalCartao.type == 'edit'">
-                        <label for="ativo" class="label-input">Ativo</label>
-                        <select v-model.trim="form.ativo" id="ativo" ref="ativo" class=" input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
-                            <option value="1" selected>Sim</option>
-                            <option value="0">Não</option>
+
+                    <div class="section-input" >
+                        <label for="cartao" class="label-input">Cartão</label>
+                        <select v-model="form.cartao" id="cartao" ref="cartao" class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                            <option v-for="cartao in cartaoPopula" :value="cartao.codigo"> {{ cartao.descricao  }}</option>                            
                         </select>
                     </div>
+
+                    <div class="section-input" >
+                        <label for="tipoCompra" class="label-input">Tipo de Operação</label>
+                        <select v-model="form.tipoCompra" id="tipoCompra" ref="tipoCompra" class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                            <option value="" selected hidden > Selecione</option>
+                            <option value="1">Entrada</option>
+                            <option value="0">Saída</option>
+                        </select>
+                    </div>
+                    
                 </div>
                 <div class="row">
                     <div class="mt-5">
@@ -86,8 +98,9 @@ import "@/assets/js/dataTable/dataTableTailwind.js";
 
 export default {
     mounted() {
-        $('#limiteCartao').mask('#.###,00', { reverse:true })
+        $('#valor').mask('#.###,00', { reverse:true })
         //this.carregarListagem()
+        this.popularComboCartao()
     },
     data() {
         return {
@@ -97,16 +110,18 @@ export default {
                 titulo: '',
                 type: ''
             },
-            modalCartao: {
+            modalOperacao: {
                 type: 'novo',
                 show: false
             },
             form: {
                 codigo: 0,
-                descricao: null,
-                limite: null,
-                ativo: null
+                descricao: '',
+                tipoCompra: '',
+                cartao: null,               
+                valor: ''
             },
+            cartaoPopula: null,
             listagem: null
         }
     },
@@ -140,13 +155,13 @@ export default {
             }
             //console.log(formataBRL(item.limite,true))
 
-            this.modalCartao = {
+            this.modalOperacao = {
                 show: true,
                 type: 'edit'
             }
         },
         cadastrarCartao(){
-            this.modalCartao = {
+            this.modalOperacao = {
                 show: true,
                 type: 'novo',               
             }
@@ -154,23 +169,27 @@ export default {
             this.form =  {
                 codigo: 0,
                 descricao: '',
-                ativo: 1
+                tipoCompra: '',
+                cartao: null,               
+                valor: '',
+                ativo: '',
             }
         },
         async gravarModal(){
             if( !this.validarFormulario() ) return;
                 
-            let resultado = await this.$axios.post('/cartao', {
+            let resultado = await this.$axios.post('/cartao/compra', {
                 codigo: this.form.codigo,
                 descricao: this.form.descricao,
-                limite: this.form.limite,
-                ativo: this.form.ativo,
+                tipoCompra: this.form.tipoCompra,
+                cartao: this.form.cartao,
+                valor: this.form.valor
             });
 
             let { status,mensage } = resultado.data;
 
             if( status == 200 ){
-                this.modalCartao.show = false;
+                this.modalOperacao.show = false;
                 this.showAlert('success', 'Atenção', mensage);
                 this.carregarListagem()
             }
@@ -185,6 +204,26 @@ export default {
             }
             
             return true
+        },
+        async popularComboCartao(){
+
+            try{
+                let results = await this.$axios.get('/cartao/listagem');
+
+                let { status, mensage, data } = results.data;
+                
+                if (status == 200) {
+                    this.cartaoPopula = data;
+                }
+
+                if( status >= 400 ){
+                    this.showAlert('error', 'Atenção', mensage);            
+                }
+                
+            }catch(err){
+                this.showAlert('error', 'Atenção', 'Entre em contato com o suporte.');            
+            }      
+
         },
         showAlert(type, titulo, descricao) {
             this.alert.show = true

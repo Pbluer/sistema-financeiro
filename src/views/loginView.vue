@@ -35,6 +35,9 @@ import { useGlobalVariableState } from "@/stores/globalVariable"
 const global = useGlobalVariableState();
 
 export default {
+    mounted(){
+        sessionStorage.removeItem('userToken')
+    },
     data() {
         return {
             alert: {

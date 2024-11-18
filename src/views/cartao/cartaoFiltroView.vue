@@ -23,14 +23,16 @@
                             </tr>
                         </thead>
                         <tbody v-for="item in listagem">
-                            <td class="border-b-2 border-r-2 flex justify-center border-blue-600">
-                                <ButtonBase id="editar" titulo="Editar" @click="editar(item)" />
-                            </td>
-                            <td class="border-b-2 border-r-2 border-blue-600">{{ item.codigo }}</td>
-                            <td class="border-b-2 border-r-2 border-blue-600">{{ item.descricao }}</td>
-                            <td class="border-b-2 border-r-2 border-blue-600">{{ formataBRL(item.limite) }}</td>
-                            <td class="border-b-2 border-r-2 border-blue-600">{{ item.ativo.data[0] ? 'Sim' : 'Não' }}
-                            </td>
+                            <tr>
+                                <td class="border-b-2 border-r-2 flex justify-center border-blue-600">
+                                    <ButtonBase id="editar" titulo="Editar" @click="editar(item)" />
+                                </td>
+                                <td class="border-b-2 border-r-2 border-blue-600">{{ item.codigo }}</td>
+                                <td class="border-b-2 border-r-2 border-blue-600">{{ item.descricao }}</td>
+                                <td class="border-b-2 border-r-2 border-blue-600">{{ formataBRL(item.limite) }}</td>
+                                <td class="border-b-2 border-r-2 border-blue-600">{{ item.ativo.data[0] ? 'Sim' : 'Não' }}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
