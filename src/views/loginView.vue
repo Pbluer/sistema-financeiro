@@ -64,6 +64,7 @@ export default {
                 email: this.email.value,
                 senha: this.senha.value,
             });
+            
             let { status, mensage, data } = resultado.data;
 
             if (status > 299) {

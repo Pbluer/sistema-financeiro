@@ -1,6 +1,6 @@
 
 .content{
-    @apply w-full px-5 mt-10 md:py-6;
+    @apply w-full px-5 mt-[5rem] md:mt-[3rem] md:py-6;
 }
 
 .content-form{
@@ -25,7 +25,7 @@
 }
 
 .modal-main{
-    @apply absolute bg-white flex top-10 flex-col z-50 p-1 rounded-xl shadow-xl w-auto;
+    @apply absolute bg-white flex top-10 flex-col z-20 p-1 rounded-xl shadow-xl w-auto;
 }
 
 .modal-header{

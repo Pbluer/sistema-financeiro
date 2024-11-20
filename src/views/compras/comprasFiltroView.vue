@@ -44,7 +44,7 @@
     </div>
 
     <ModalBase @fechar="() => modalOperacao.show = false" v-show="modalOperacao.show">
-        <template v-slot:titulo>Cartão</template>
+        <template v-slot:titulo>Compra</template>
         <template v-slot:body>
             <form class="form">
 
@@ -53,37 +53,61 @@
                 </div>
 
                 <div class="flex flex-col gap-y-2">
-                    <div class="section-input">
-                        <label class="label-input" for="descricao">Descrição</label>
-                        <input v-model.trim="form.descricao" type="text" ref="descricao" id="descricao"
-                            class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+
+                    <div class="row">
+                        <div class="section-input">
+                            <label class="label-input" for="descricao">Descrição</label>
+                            <input v-model.trim="form.descricao" type="text" ref="descricao" id="descricao"
+                                class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                        </div>
+    
+                        <div class="section-input">
+                            <label class="label-input" for="valor">Valor</label>
+                            <input v-model.lazy="form.valor" type="text" ref="valor" id="valor"
+                                class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                        </div>
                     </div>
 
-                    <div class="section-input">
-                        <label class="label-input" for="valor">Valor</label>
-                        <input v-model.lazy="form.valor" type="text" ref="valor" id="valor"
-                            class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                    <div class="row">
+                        <div class="section-input" >
+                            <label for="cartao" class="label-input">Cartão</label>
+                            <select v-model="form.cartao" id="cartao" ref="cartao" class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                                <option selected hidden value=""> Selecione </option>                            
+                                <option v-for="cartao in cartaoPopula" :value="cartao.codigo"> {{ cartao.descricao  }}</option>                            
+                            </select>
+                        </div>
+
+                        <div class="section-input" >
+                            <label for="tipoCompra" class="label-input">Tipo de Operação</label>
+                            <select v-model="form.tipoCompra" id="tipoCompra" ref="tipoCompra" class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                                <option selected hidden value=""> Selecione </option>
+                                <option value="1"> Entrada </option>
+                                <option value="0"> Saída </option>
+                            </select>
+                        </div>
+
                     </div>
 
-                    <div class="section-input" >
-                        <label for="cartao" class="label-input">Cartão</label>
-                        <select v-model="form.cartao" id="cartao" ref="cartao" class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
-                            <option v-for="cartao in cartaoPopula" :value="cartao.codigo"> {{ cartao.descricao  }}</option>                            
-                        </select>
+                    <div class="row">
+                        <div class="section-input" >
+                            <label for="retroativo" class="label-input">Compra Retroativa?</label>
+                            <select v-model="form.retroativo" class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]" ref="retroativo" name="retroativo">
+                                <option value="true"> Sim </option>
+                                <option value="false"> Não </option>
+                            </select>
+                        </div>
+    
+                        <div class="section-input">
+                            <label class="label-input" for="dataCompra">Data da Compra</label>
+                            <input v-model.trim="form.dataCompra" :disabled="form.retroativo"
+                                type="text" ref="dataCompra" id="dataCompra"
+                                class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                        </div>
                     </div>
 
-                    <div class="section-input" >
-                        <label for="tipoCompra" class="label-input">Tipo de Operação</label>
-                        <select v-model="form.tipoCompra" id="tipoCompra" ref="tipoCompra" class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
-                            <option value="" selected hidden > Selecione</option>
-                            <option value="1">Entrada</option>
-                            <option value="0">Saída</option>
-                        </select>
-                    </div>
-                    
                 </div>
                 <div class="row">
-                    <div class="mt-5">
+                    <div class="my-5">
                         <ButtonBase titulo="Finalizar" @click="gravarModal" class="button-success" />
                     </div>
                 </div>
@@ -117,9 +141,11 @@ export default {
             form: {
                 codigo: 0,
                 descricao: '',
+                valor: '',
+                cartao: '',
                 tipoCompra: '',
-                cartao: null,               
-                valor: ''
+                retroativo: false,               
+                dataCompra: ''
             },
             cartaoPopula: null,
             listagem: null
@@ -150,10 +176,13 @@ export default {
             this.form = {
                 codigo: item.codigo,
                 descricao: item.descricao,
-                limite: item.limite,
-                ativo: item.ativo.data[0]
+                tipoCompra: item.tipoCompra,
+                cartao: item.cartao,
+                retroativo: item.retroativo,
+                valor: item.valor,
+                data: item.data,
+                dataCompra: item.dataCompra,
             }
-            //console.log(formataBRL(item.limite,true))
 
             this.modalOperacao = {
                 show: true,
@@ -169,22 +198,17 @@ export default {
             this.form =  {
                 codigo: 0,
                 descricao: '',
-                tipoCompra: '',
-                cartao: null,               
                 valor: '',
-                ativo: '',
+                cartao: '',
+                tipoCompra: '',
+                retroativo: false,               
+                dataCompra: ''
             }
         },
         async gravarModal(){
             if( !this.validarFormulario() ) return;
                 
-            let resultado = await this.$axios.post('/cartao/compra', {
-                codigo: this.form.codigo,
-                descricao: this.form.descricao,
-                tipoCompra: this.form.tipoCompra,
-                cartao: this.form.cartao,
-                valor: this.form.valor
-            });
+            let resultado = await this.$axios.post('/cartao/compra', this.form);
 
             let { status,mensage } = resultado.data;
 
@@ -195,11 +219,41 @@ export default {
             }
         },
         validarFormulario(){
-            let descricao = this.$refs.descricao
+            let descricao = this.$refs.descricao;
+            let valor = this.$refs.valor;
+            let cartao = this.$refs.cartao;
+            let tipoCompra = this.$refs.tipoCompra;
+            let retroativo = this.$refs.retroativo;
+            let dataCompra = this.$refs.dataCompra;
 
             if( !descricao.value ){
                 descricao.focus()
                 this.showAlert('error', 'Atenção', 'Informe a descrição.');
+                return false
+            }
+
+            if( !valor.value ){
+                valor.focus()
+                this.showAlert('error', 'Atenção', 'Informe o valor da compra.');
+                return false
+            }
+
+            if( !cartao.value ){
+                cartao.focus()
+                this.showAlert('error', 'Atenção', 'Informe o cartão que será debitado a compra.');
+                return false
+            }
+
+            if( !tipoCompra.value ){
+                tipoCompra.focus()
+                this.showAlert('error', 'Atenção', 'Selecione o tipo de operacão.');
+                return false
+            }
+            console.log(dataCompra.value)
+            console.log(retroativo.value)
+            if( !dataCompra.value && retroativo.value ){
+                dataCompra.focus()
+                this.showAlert('error', 'Atenção', 'Informe a data da compra.');
                 return false
             }
             

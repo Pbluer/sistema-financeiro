@@ -1,5 +1,5 @@
 <template>
-    <div :class="setClass(type)" class="absolute right-2 top-5 rounded-lg p-3 w-auto shadow-xl animate__animated animate__fadeIn">
+    <div :class="setClass(type)" class="absolute right-2 z-40 top-5 rounded-lg p-3 w-auto shadow-xl animate__animated animate__fadeIn">
         <h1 class="text-start font-bold">
             {{ titulo }}
         </h1>
