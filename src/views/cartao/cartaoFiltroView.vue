@@ -30,7 +30,8 @@
                                 <td class="border-b-2 border-r-2 border-blue-600">{{ item.codigo }}</td>
                                 <td class="border-b-2 border-r-2 border-blue-600">{{ item.descricao }}</td>
                                 <td class="border-b-2 border-r-2 border-blue-600">{{ formataBRL(item.limite) }}</td>
-                                <td class="border-b-2 border-r-2 border-blue-600">{{ item.ativo.data[0] ? 'Sim' : 'Não' }}
+                                <td class="border-b-2 border-r-2 border-blue-600">{{ item.ativo.data[0] ? 'Sim' : 'Não'
+                                    }}
                                 </td>
                             </tr>
                         </tbody>
@@ -47,35 +48,35 @@
             <form class="form">
 
                 <div class="my-5">
-                    <h1 class="text-center font-bold text-xl">{{ modalCartao.type == 'edit'? 'Alteração' : 'Cadastro'  }}</h1>
+                    <h1 class="text-center font-bold text-xl">{{ modalCartao.type == 'edit'? 'Alteração' : 'Cadastro' }}
+                    </h1>
                 </div>
 
                 <div class="row">
                     <div class="section-input">
                         <label class="label-input" for="descricao">Descrição</label>
                         <input v-model.trim="form.descricao" type="text" ref="descricao" id="descricao"
-                            class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
-                    </div>
+                            class="input w-[85vw] sm:w-[20rem]">
+                    </div>                  
                 </div>
-
-                <div class="flex flex-col">
+                <div class="row">
                     <div class="section-input">
                         <label class="label-input" for="limiteCartao">Limite</label>
                         <input v-model.lazy="form.limite" type="text" ref="limiteCartao" id="limiteCartao"
-                            class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
-                    </div>
+                            class="input w-[85vw] sm:w-[20rem]">
+                    </div>                    
+                </div>
+                <div class="row">
                     <div class="section-input" ref="sectionAtivo" v-show="modalCartao.type == 'edit'">
                         <label for="ativo" class="label-input">Ativo</label>
-                        <select v-model.trim="form.ativo" id="ativo" ref="ativo" class=" input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                        <select v-model.trim="form.ativo" id="ativo" ref="ativo" class=" input w-[85vw] sm:w-[20rem]">
                             <option value="1" selected>Sim</option>
                             <option value="0">Não</option>
                         </select>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="mt-5">
-                        <ButtonBase titulo="Finalizar" @click="gravarModal" class="button-success" />
-                    </div>
+                <div>
+                    <ButtonBase titulo="Finalizar" @click="gravarModal" class="button-success" />
                 </div>
             </form>
         </template>

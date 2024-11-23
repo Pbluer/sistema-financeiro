@@ -46,32 +46,30 @@
     <ModalBase @fechar="() => modalOperacao.show = false" v-show="modalOperacao.show">
         <template v-slot:titulo>Compra</template>
         <template v-slot:body>
+            <div class="my-5">
+                <h1 class="text-center font-bold text-xl">{{ modalOperacao.type == 'edit'? 'Alteração' : 'Cadastro'  }}</h1>
+            </div>
             <form class="form">
-
-                <div class="my-5">
-                    <h1 class="text-center font-bold text-xl">{{ modalOperacao.type == 'edit'? 'Alteração' : 'Cadastro'  }}</h1>
-                </div>
-
                 <div class="flex flex-col gap-y-2">
 
                     <div class="row">
                         <div class="section-input">
                             <label class="label-input" for="descricao">Descrição</label>
                             <input v-model.trim="form.descricao" type="text" ref="descricao" id="descricao"
-                                class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                                class="input w-[90vw] sm:w-[21rem]">
                         </div>
     
                         <div class="section-input">
                             <label class="label-input" for="valor">Valor</label>
                             <input v-model.lazy="form.valor" type="text" ref="valor" id="valor"
-                                class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                                class="input w-[90vw] sm:w-[7rem]">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="section-input" >
                             <label for="cartao" class="label-input">Cartão</label>
-                            <select v-model="form.cartao" id="cartao" ref="cartao" class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                            <select v-model="form.cartao" id="cartao" ref="cartao" class="input w-[90vw] sm:w-[10rem]">
                                 <option selected hidden value=""> Selecione </option>                            
                                 <option v-for="cartao in cartaoPopula" :value="cartao.codigo"> {{ cartao.descricao  }}</option>                            
                             </select>
@@ -79,10 +77,28 @@
 
                         <div class="section-input" >
                             <label for="tipoCompra" class="label-input">Tipo de Operação</label>
-                            <select v-model="form.tipoCompra" id="tipoCompra" ref="tipoCompra" class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                            <select v-model="form.tipoCompra" id="tipoCompra" ref="tipoCompra" class="input w-[90vw] sm:w-[10rem]">
                                 <option selected hidden value=""> Selecione </option>
                                 <option value="1"> Entrada </option>
-                                <option value="0"> Saída </option>
+                                <option value="2"> Saída </option>
+                            </select>
+                        </div>
+
+                        <div class="section-input">
+                            <label for="parcela" class="label-input">Parcela</label>
+                            <select v-model="form.parcela" id="parcela" ref="parcela" class="input w-[90vw] sm:w-[7rem]" :disabled="form.tipoCompra != '2'">
+                                <option selected value="1"> À vista </option>
+                                <option value="2"> 2x </option>
+                                <option value="3"> 3x </option>
+                                <option value="4"> 4x </option>
+                                <option value="5"> 5x </option>
+                                <option value="6"> 6x </option>
+                                <option value="7"> 7x </option>
+                                <option value="8"> 8x </option>
+                                <option value="9"> 9x </option>
+                                <option value="10"> 10x </option>
+                                <option value="11"> 11x </option>
+                                <option value="12"> 12x </option>
                             </select>
                         </div>
 
@@ -91,17 +107,17 @@
                     <div class="row">
                         <div class="section-input" >
                             <label for="retroativo" class="label-input">Compra Retroativa?</label>
-                            <select v-model="form.retroativo" class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]" ref="retroativo" name="retroativo">
-                                <option value="true"> Sim </option>
-                                <option value="false"> Não </option>
+                            <select v-model="form.retroativo" class="input w-[90vw] sm:w-[10rem]" ref="retroativo" id="retroativo" name="retroativo">
+                                <option value="1"> Sim </option>
+                                <option value="0"> Não </option>
                             </select>
                         </div>
     
                         <div class="section-input">
                             <label class="label-input" for="dataCompra">Data da Compra</label>
-                            <input v-model.trim="form.dataCompra" :disabled="form.retroativo"
-                                type="text" ref="dataCompra" id="dataCompra"
-                                class="input w-[90vw] sm:w-[40vw] md:w-[35vw] lg:w-[15vw]">
+                            <input v-model="form.dataCompra" :disabled="!+form.retroativo"
+                                type="date" ref="dataCompra" id="dataCompra" 
+                                class="input w-[90vw] sm:w-[10rem]">
                         </div>
                     </div>
 
@@ -126,6 +142,13 @@ export default {
         //this.carregarListagem()
         this.popularComboCartao()
     },
+    watch:{      
+        'form.tipoCompra'(value){
+            if( value == '1'){
+                this.form.parcela = 1
+            }
+        }
+    },
     data() {
         return {
             alert: {
@@ -144,7 +167,8 @@ export default {
                 valor: '',
                 cartao: '',
                 tipoCompra: '',
-                retroativo: false,               
+                retroativo: 0,
+                parcela: 1,               
                 dataCompra: ''
             },
             cartaoPopula: null,
@@ -201,7 +225,8 @@ export default {
                 valor: '',
                 cartao: '',
                 tipoCompra: '',
-                retroativo: false,               
+                retroativo: 0,          
+                parcela: 1,                  
                 dataCompra: ''
             }
         },
@@ -249,9 +274,8 @@ export default {
                 this.showAlert('error', 'Atenção', 'Selecione o tipo de operacão.');
                 return false
             }
-            console.log(dataCompra.value)
-            console.log(retroativo.value)
-            if( !dataCompra.value && retroativo.value ){
+
+            if( dataCompra.value && retroativo.value ){
                 dataCompra.focus()
                 this.showAlert('error', 'Atenção', 'Informe a data da compra.');
                 return false
@@ -285,7 +309,7 @@ export default {
             this.alert.titulo = titulo
             this.alert.descricao = descricao
     
-            setTimeout(() => this.alert.show = false, 1500);
+            setTimeout(() => this.alert.show = false, 1800);
         }
     }
 }

@@ -8,7 +8,7 @@
 }
 
 .main{
-    @apply flex flex-row w-screen;
+    @apply flex flex-row w-full;
 }
 
 .form{
@@ -16,7 +16,7 @@
 }
 
 .row{
-    @apply flex flex-col justify-center items-center
+    @apply flex flex-col justify-start
         sm:gap-4 sm:flex-row;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .modal-main{
-    @apply absolute bg-white flex top-10 flex-col z-20 p-1 rounded-xl shadow-xl w-auto;
+    @apply absolute bg-white flex top-10 flex-col z-20 p-1 mx-10 rounded-xl shadow-xl w-[95vw] sm:w-auto;
 }
 
 .modal-header{
